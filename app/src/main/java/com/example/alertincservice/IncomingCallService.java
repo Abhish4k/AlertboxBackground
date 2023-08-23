@@ -51,6 +51,7 @@ public class IncomingCallService extends Service {
     private class IncomingCallReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d("onReceive","" + intent);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 showAlertDialog(context);
             }
@@ -63,22 +64,15 @@ public class IncomingCallService extends Service {
         builder.setTitle("Incoming Call");
         builder.setIcon(R.drawable.moleskin);
         builder.setMessage("You have an Incoming call! Pick Up.");
-        builder.setPositiveButton("Answer", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setPositiveButton("Answer", (dialog, which) -> {
 
-                Intent openAppIntent = new Intent(context, MainActivity.class);
-                openAppIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(openAppIntent);
-
-            }
+            Intent openAppIntent = new Intent(context, MainActivity.class);
+            openAppIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(openAppIntent);
 
         });
-        builder.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Code to decline the call by the alert dialog box will be here
-            }
+        builder.setNegativeButton("Decline", (dialog, which) -> {
+            // Code to decline the call by the alert dialog box will be here
         });
 
         AlertDialog alertDialog = builder.create();

@@ -1,11 +1,15 @@
 package com.example.alertincservice;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
     private IncomingCallService mService;
@@ -16,9 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+/*
         Intent intent = new Intent(this , IncomingCallService.class);
-        bindService(intent , mConnection , Context.BIND_AUTO_CREATE);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+       // bindService(intent , mConnection , Context.BIND_AUTO_CREATE);
+        startService(intent);*/
 
     }
 
@@ -46,5 +52,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
+
+
 
 }
